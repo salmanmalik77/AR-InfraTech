@@ -6,6 +6,10 @@
 trigger:
 - master
 
+variables:
+  uiSource: 'src'  # Correct variable name for the source code folder
+  uiBuild: '$(uiSouce)/build'  # Correct path for build folder
+
 pool:
   vmImage: ubuntu-latest
 
