@@ -4,7 +4,7 @@ import { slideUpVariants, zoomInVariants } from "./animation";
 import { allservices } from "../export";
 const Services = () => {
   return (
-    <div id="services" className="w-full bg-white">
+    <div id="services" className="w-full  bg-gray-700">
       <motion.div
         initial="hidden"
         whileInView="visible"
@@ -14,21 +14,20 @@ const Services = () => {
       >
         <motion.h1
           variants={slideUpVariants}
-          className="text-yellow-500
-      text-2xl"
+          className="text-blue-400 text-2xl
+      "
         >
           Special offer
         </motion.h1>
         <motion.h1
           variants={slideUpVariants}
-          className="text-black
-      uppercase text-[40px] font-bold text-center "
+          className="text-white uppercase text-[40px] font-bold text-center "
         >
           Our Best Services
         </motion.h1>
         <motion.div
           variants={slideUpVariants}
-          className="w-[120px] h-[6px] bg-yellow-500"
+          className="w-[120px] h-[6px] bg-blue-400"
         ></motion.div>
         {/* make div for services mappings from export js file */}
         <motion.div
@@ -36,23 +35,25 @@ const Services = () => {
           whileInView="visible"
           variants={zoomInVariants}
           className="w-full grid lg:grid-cols-3 grid-cols-1 justify-center
-        itmes-start gap-[20px] mt-[30px]"
+        items-start gap-[20px] mt-[30px]"
         >
           {allservices.map((item, index) => (
             <motion.div
               variants={zoomInVariants}
-              className="flex justify-center items-start gap-5 p-8"
+              // className="flex justify-center items-start gap-5 p-8"
+              className="flex flex-col justify-center items-center gap-5 p-8 bg-gray-400
+                         rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300"
               key={index}
             >
               <img
                 src={item.icon}
                 alt="icon"
-                className="w-[140px] border-2 
-              border-yellow-500 hover:bg-yellow-500  rounded-lg- p-2"
+                className="w-[95px]  
+              border-4 border-blue-600  hover:bg-blue-500  rounded-lg p-2"
               />
               <div className="flex flex-col justitfy-center items-start gap-3">
-                <h1 className="text-xl font-bold text-black ">{item.title}</h1>
-                <p className="text-[18px]">{item.about}</p>
+                <h1 className="text-xl font-bold text-white ">{item.title}</h1>
+                <p className="text-[18px] text-white">{item.about}</p>
               </div>
             </motion.div>
           ))}
