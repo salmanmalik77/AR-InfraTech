@@ -4,7 +4,7 @@ import { slideUpVariants, zoomInVariants } from "./animation";
 import { planning } from "../export";
 const Working = () => {
   return (
-    <div id="working" className="w-full bg-white">
+    <div id="working" className="w-full bg-gray-700">
       <motion.div
         initial="hidden"
         whileInView="visible"
@@ -14,21 +14,20 @@ const Working = () => {
       >
         <motion.h1
           variants={slideUpVariants}
-          className="text-yellow-500
-    text-2xl"
+          className="text-blue-400 text-2xl"
         >
           Step By Step
         </motion.h1>
         <motion.h1
           variants={slideUpVariants}
-          className="text-black
-    uppercase text-[40px] font-bold text-center "
+          className="text-white
+      uppercase text-[40px] font-bold text-center "
         >
           How its Working
         </motion.h1>
         <motion.div
           variants={slideUpVariants}
-          className="w-[120px] h-[6px] bg-yellow-500"
+          className="w-[120px] h-[6px] bg-blue-400"
         ></motion.div>
         {/* make div for services mappings from export js file */}
         <motion.div
@@ -36,22 +35,24 @@ const Working = () => {
           whileInView="visible"
           variants={zoomInVariants}
           className="w-full grid lg:grid-cols-4 grid-cols-1 justify-center
-                     itmes-start gap-[20px] mt-[30px]"
+                     itmes-start gap-[20px] mt-[30px] "
         >
           {planning.map((item, index) => (
             <div
               key={index}
               className="flex flex-col justify-center items-center
-                        gap-5 border-2 border-yellow-500 rounded-mg py-6"
+                        gap-5 border-2 rounded-mg py-6 bg-gray-400 "
             >
               <div>
                 <item.icon
-                  className="size-[80px] bg-yellow-500 hover:bg-black 
-                          hover:fill-white p-4 rounded-full cursor-pointer"
+                  className=" border-blue-600 size-[80px]  hover:bg-blue-500  
+                         border-4 fill-black p-4 cursor-pointer"
                 ></item.icon>
               </div>
-              <h1 className="text-2xl font-bold uppercase ">{item.title}</h1>
-              <p className="text-[20px] text-center text-gray-600 ">
+              <h1 className="text-xl font-bold uppercase  text-white">
+                {item.title}
+              </h1>
+              <p className="text-[18px] text-center text-white ">
                 {item.about}
               </p>
             </div>

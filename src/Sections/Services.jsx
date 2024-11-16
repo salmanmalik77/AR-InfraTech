@@ -17,7 +17,7 @@ const Services = () => {
           className="text-blue-400 text-2xl
       "
         >
-          Special offer
+          Specifications
         </motion.h1>
         <motion.h1
           variants={slideUpVariants}
@@ -40,19 +40,17 @@ const Services = () => {
           {allservices.map((item, index) => (
             <motion.div
               variants={zoomInVariants}
-              // className="flex justify-center items-start gap-5 p-8"
               className="flex flex-col justify-center items-center gap-5 p-8 bg-gray-400
-                         rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300"
+               rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300"
               key={index}
             >
               <img
                 src={item.icon}
                 alt="icon"
-                className="w-[95px]  
-              border-4 border-blue-600  hover:bg-blue-500  rounded-lg p-2"
+                className="w-[95px] border-4 border-blue-600 hover:bg-blue-500 rounded-lg p-2"
               />
-              <div className="flex flex-col justitfy-center items-start gap-3">
-                <h1 className="text-xl font-bold text-white ">{item.title}</h1>
+              <div className="flex flex-col justify-center items-start gap-3">
+                <h1 className="text-xl font-bold text-white">{item.title}</h1>
                 <p className="text-[18px] text-white">{item.about}</p>
               </div>
             </motion.div>

@@ -45,7 +45,7 @@ const Header = () => {
         ))}
       </ul>
       <button
-        className="bg-blue-500 hover:bg-white hover:text-black text-white px-6 py-2 rounded-full 
+        className="bg-blue-500 hover:bg-white hover:text-blue-500 text-white px-6 py-2 rounded-full 
                    font-semibold transform hover:scale-105 transition-transform duration-300 
                    cursor-pointer md:flex hidden"
       >

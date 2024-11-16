@@ -1,6 +1,7 @@
 import React from "react";
 
 import heroimg from "../assets/heroimg.png";
+import three from "../assets/three.jpeg";
 import backgroundImage from "../assets/homeimg.webp";
 
 import { motion } from "framer-motion";
@@ -14,7 +15,7 @@ const Hero = () => {
       className="bg-gray w-full lg:h-[700px] h-fit m-auto pt-[50px]
       lg:pt-[0px] lg:px-[150px] px-[20px] flex justify-between items-center lg:flex-row flex-col
       lg:gap-5 gap-[50px] bg-cover bg-center"
-      style={{ backgroundImage: `url(${backgroundImage})` }}
+      style={{ backgroundImage: `url(${three})` }}
     >
       <motion.div
         initial="hidden"
@@ -47,15 +48,15 @@ const Hero = () => {
         >
           <motion.button
             variants={zoomInVariants}
-            className="bg-blue-500 hover:bg-white hover:text-black px-10 py-3 
+            className="bg-blue-500 hover:bg-white hover:text-blue-500 px-10 py-3 
             rounded-lg text-white font-bold"
           >
             Read More
           </motion.button>
           <motion.button
             variants={zoomInVariants}
-            className="border-blue-500 hover:bg-blue-500 hover:text-white
-            border-2 px-10 py-3 rounded-lg text-white font-bold"
+            className=" hover:bg-blue-500 hover:text-white
+            border-2 px-10 py-3 rounded-lg text-blue-500 font-bold bg-white"
           >
             Reach Us
           </motion.button>
