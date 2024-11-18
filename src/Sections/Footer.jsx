@@ -11,18 +11,18 @@ const Footer = () => {
   return (
     <>
       <div
-        className="bg-gray-900 text-white flex justify-center items-center gap-2
+        className="bg-[#E5E5E5] text-white flex justify-center items-center gap-2
     p-5"
       >
-        <FaCopyright className="fill-blue-500 lg:size-5 size-8 " />
-        <p className="text-lg text-center ">
+        <FaCopyright className="fill-[#f8be5c] lg:size-7 size-8 " />
+        <p className="text-lg text-center text-gray-700 ">
           Copyright 2025, AR InfraTech, All Right Reserved
         </p>
       </div>
       {/* scroll to top button */}
       <div
         id="icon-box"
-        className="bg-white text-blue-500 p-3 rounded-full hover:bg-blue-500
+        className="bg-blue-500 text-white p-3 rounded-full hover:bg-[#FF4F5A]
               hover:text-white cursor-pointer fixed lg:bottom-6 right-6 bottom-6"
         onClick={scrollToTop} // Force scroll to top
       >

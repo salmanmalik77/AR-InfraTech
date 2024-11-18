@@ -4,7 +4,7 @@ import { slideUpVariants, zoomInVariants } from "./animation";
 import { planning } from "../export";
 const Working = () => {
   return (
-    <div id="working" className="w-full bg-gray-700">
+    <div id="working" className="w-full bg-[#E5E5E5]">
       <motion.div
         initial="hidden"
         whileInView="visible"
@@ -20,14 +20,14 @@ const Working = () => {
         </motion.h1>
         <motion.h1
           variants={slideUpVariants}
-          className="text-white
-      uppercase text-[40px] font-bold text-center "
+          className="text-[#1E293B]
+      uppercase text-[35px] font-bold text-center "
         >
           How its Working
         </motion.h1>
         <motion.div
           variants={slideUpVariants}
-          className="w-[120px] h-[6px] bg-blue-400"
+          className="w-[120px] h-[6px] bg-[#FF4F5A]"
         ></motion.div>
         {/* make div for services mappings from export js file */}
         <motion.div
@@ -41,11 +41,11 @@ const Working = () => {
             <div
               key={index}
               className="flex flex-col justify-center items-center
-                        gap-5 border-2 rounded-mg py-6 bg-gray-400 "
+                        gap-5 border-2 rounded-mg py-6 bg-[#f8be5c] hover:bg-[#FF4F5A] "
             >
               <div>
                 <item.icon
-                  className=" border-blue-600 size-[80px]  hover:bg-blue-500  
+                  className=" border-[#c38d2f] size-[80px]  hover:bg-[#FF4F5A] 
                          border-4 fill-black p-4 cursor-pointer"
                 ></item.icon>
               </div>

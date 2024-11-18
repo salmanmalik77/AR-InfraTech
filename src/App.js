@@ -8,6 +8,7 @@ import Portfolio from "./Sections/Portfolio";
 import Working from "./Sections/Working";
 import Testimonials from "./Sections/Testimonials";
 import Contact from "./Sections/Contact";
+import "./App.css";
 const App = () => {
   return (
     <>

@@ -12,7 +12,7 @@ import project8 from "../assets/project8.jpg";
 
 const Portfolio = () => {
   return (
-    <div id="projects" className="w-full bg-gray-500 ">
+    <div id="projects" className="w-full bg-[#E5E5E5] ">
       <motion.div
         initial="hidden"
         whileInView="visible"
@@ -28,14 +28,14 @@ const Portfolio = () => {
         </motion.h1>
         <motion.h1
           variants={slideUpVariants}
-          className="text-white
-      uppercase text-[40px] font-bold text-center "
+          className="text-[#1E293B]
+      uppercase text-[35px] font-bold text-center "
         >
           Our Best Projects
         </motion.h1>
         <motion.div
           variants={slideUpVariants}
-          className="w-[120px] h-[6px] bg-blue-400"
+          className="w-[120px] h-[6px] bg-[#FF4F5A]"
         ></motion.div>
       </motion.div>
 
@@ -43,7 +43,7 @@ const Portfolio = () => {
         initial="hidden"
         whileInView="visible"
         variants={zoomInVariants}
-        className="w-full m-auto grid lg:grid-cols-4 grid-cols-1 duration-400"
+        className="w-full m-auto grid lg:grid-cols-4 grid-cols-1 duration-600"
       >
         <img src={project1} alt="project image" className="h-[250px]" />
         <img src={project2} alt="project image" className="h-[250px]" />

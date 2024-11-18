@@ -2,9 +2,10 @@ import React from "react";
 import { motion } from "framer-motion";
 import { slideUpVariants, zoomInVariants } from "./animation";
 import { allservices } from "../export";
+
 const Services = () => {
   return (
-    <div id="services" className="w-full  bg-gray-700">
+    <div id="services" className="w-full  bg-[#E5E5E5]">
       <motion.div
         initial="hidden"
         whileInView="visible"
@@ -21,13 +22,13 @@ const Services = () => {
         </motion.h1>
         <motion.h1
           variants={slideUpVariants}
-          className="text-white uppercase text-[40px] font-bold text-center "
+          className="text-[#1E293B] uppercase text-[35px] font-bold text-center "
         >
           Our Best Services
         </motion.h1>
         <motion.div
           variants={slideUpVariants}
-          className="w-[120px] h-[6px] bg-blue-400"
+          className="w-[120px] h-[6px] bg-[#FF4F5A]"
         ></motion.div>
         {/* make div for services mappings from export js file */}
         <motion.div
@@ -40,14 +41,14 @@ const Services = () => {
           {allservices.map((item, index) => (
             <motion.div
               variants={zoomInVariants}
-              className="flex flex-col justify-center items-center gap-5 p-8 bg-gray-400
+              className="flex flex-col justify-center items-center gap-5 p-8 bg-[#f8be5c] hover:bg-[#FF4F5A]
                rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300"
               key={index}
             >
               <img
                 src={item.icon}
                 alt="icon"
-                className="w-[95px] border-4 border-blue-600 hover:bg-blue-500 rounded-lg p-2"
+                className="w-[95px] border-4 border-[#c38d2f] hover:bg-[#FF4F5A] rounded-lg p-2"
               />
               <div className="flex flex-col justify-center items-start gap-3">
                 <h1 className="text-xl font-bold text-white">{item.title}</h1>

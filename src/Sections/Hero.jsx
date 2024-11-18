@@ -1,22 +1,23 @@
 import React from "react";
-
 import heroimg from "../assets/heroimg.png";
 import three from "../assets/three.jpeg";
-import backgroundImage from "../assets/homeimg.webp";
-
+import five from "../assets/five.jpg";
 import { motion } from "framer-motion";
-
 import { slideUpVariants, zoomInVariants } from "./animation";
 
 const Hero = () => {
   return (
     <div
       id="home"
-      className="bg-gray w-full lg:h-[700px] h-fit m-auto pt-[50px]
-      lg:pt-[0px] lg:px-[150px] px-[20px] flex justify-between items-center lg:flex-row flex-col
-      lg:gap-5 gap-[50px] bg-cover bg-center"
-      style={{ backgroundImage: `url(${three})` }}
+      className="w-full lg:h-[700px] h-fit m-auto pt-[50px] lg:pt-0 lg:px-[150px] px-[20px] 
+                 flex justify-between items-center lg:flex-row flex-col lg:gap-5 gap-[50px] 
+                 bg-cover bg-center"
+      style={{
+        backgroundImage: `url(${five})`,
+        backgroundColor: "#F1F5F9", // Light gray background
+      }}
     >
+      {/* Left Content */}
       <motion.div
         initial="hidden"
         whileInView="visible"
@@ -25,18 +26,21 @@ const Hero = () => {
       >
         <motion.h1
           variants={slideUpVariants}
-          className="text-blue-400 text-2xl"
+          className="text-[#2563EB] text-2xl" // Blue heading
         >
           WE ARE BUILDERS
         </motion.h1>
         <motion.h1
           variants={slideUpVariants}
-          className="text-white uppercase text-[50px] font-bold"
+          className="text-[#1E293B] uppercase text-[40px] lg:text-[50px] font-bold leading-tight" // Dark gray main heading
         >
           we will build your dreams
         </motion.h1>
-        <div className="w-[120px] h-[6px] bg-blue-400"></div>
-        <p className="text-gray-200 text-[30px]">
+        <div className="w-[120px] h-[6px] bg-[#FF4F5A]"></div>{" "}
+        {/* Blue divider */}
+        <p className="text-[#1E293B] text-lg lg:text-[30px]">
+          {" "}
+          {/* Muted gray paragraph */}
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
           gravida cursus
         </p>
@@ -44,33 +48,34 @@ const Hero = () => {
           initial="hidden"
           whileInView="visible"
           variants={zoomInVariants}
-          className="flex justify-center items-center gap-5"
+          className="flex justify-start items-center gap-5"
         >
           <motion.button
             variants={zoomInVariants}
-            className="bg-blue-500 hover:bg-white hover:text-blue-500 px-10 py-3 
-            rounded-lg text-white font-bold"
+            className="bg-[#2563EB] hover:bg-[#FF4F5A] hover:text-white px-8 lg:px-10 py-3 
+                       rounded-lg text-white font-bold transition duration-300"
           >
             Read More
           </motion.button>
           <motion.button
             variants={zoomInVariants}
-            className=" hover:bg-blue-500 hover:text-white
-            border-2 px-10 py-3 rounded-lg text-blue-500 font-bold bg-white"
+            className="hover:bg-[#FF4F5A] hover:text-white border-2 px-8 lg:px-10 py-3 
+                       rounded-lg text-[#2563EB] font-bold bg-white transition duration-300"
           >
             Reach Us
           </motion.button>
         </motion.div>
       </motion.div>
-      <div className="w-[40%] flex flex-col justify-end items-end">
+
+      {/* Right Content */}
+      <div className="lg:w-[40%] w-full flex justify-center items-center">
         <motion.img
           initial="hidden"
           whileInView="visible"
           variants={zoomInVariants}
           src={heroimg}
           alt="hero image"
-          className="lg:h-[600] h-[450px]
-          lg:mb-[-100px]"
+          className="lg:h-[600px] h-[450px] object-contain lg:mb-[-100px]"
         />
       </div>
     </div>

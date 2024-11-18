@@ -5,36 +5,29 @@ import { slideUpVariants, zoomInVariants } from "./animation";
 const About = () => {
   return (
     <div
-      className="lg:w-[80%] w-[90%] m-auto py-[60px] flex lg:flex-row flex-col 
-                 justify-between items-start gap-[50px] "
+      className="w-full min-h-screen py-[60px] flex lg:flex-row flex-col 
+                 justify-between items-start gap-[50px] bg-[#E5E5E5]"
       id="about"
     >
+      {/* Left Content */}
       <motion.div
         initial="hidden"
         whileInView="visible"
         variants={slideUpVariants}
-        className="lg:w-[60%] w-full flex flex-col justify-center items-start gap-6 "
+        className="lg:w-[60%] w-full flex flex-col justify-center items-start gap-6 px-4"
       >
         <motion.h1
           variants={slideUpVariants}
-          className="text-blue-400 text-2xl"
+          className="text-[#005AA7] text-2xl font-bold"
         >
-          WELCOME TO{" "}
+          WELCOME TO
         </motion.h1>
-        {/* <motion.h1
-          variants={slideUpVariants}
-          className="text-white uppercase text-[40px] font-bold"
-        >
-          AR - InfraTech
-        </motion.h1> */}
-        <h1 className="text-white md:text-4xl text-3xl font-bold font-rubik">
-          AR-
-          <span className="text-blue-400 uppercase text-[40px] font-bold">
-            InfraTech
-          </span>
+        <h1 className="md:text-4xl text-3xl font-bold font-rubik">
+          <span className="text-[#FF4F5A]">AR-</span>
+          <span className="text-[#005AA7] uppercase">InfraTech</span>
         </h1>
-        <div className="w-[120px] h-[6px] bg-blue-400"></div>
-        <p className="text-lg italic text-white mt-[50px]">
+        <div className="w-[120px] h-[6px] bg-[#005AA7]"></div>
+        <p className="text-lg italic text-gray-700 mt-[50px]">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam
           quos, rerum voluptatum consectetur dolor odit earum est. Enim,
           explicabo? Tempore, reiciendis. Nobis voluptas magnam sit vel! Fugiat
@@ -42,13 +35,14 @@ const About = () => {
         </p>
       </motion.div>
 
+      {/* Right Content */}
       <motion.div
         initial="hidden"
         whileInView="visible"
         variants={slideUpVariants}
-        className="lg:w-[40%] w-full flex flex-col justify-center items-start gap-6"
+        className="lg:w-[40%] w-full flex flex-col justify-center items-start gap-6 px-4"
       >
-        <p className="text-white text-lg text-justify">
+        <p className="text-gray-700 text-lg text-justify">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus,
           maiores. Pariatur nulla illum accusamus nemo maiores et aspernatur quo
           sint cumque est voluptates incidunt omnis aliquam fuga amet dolorem
@@ -64,7 +58,7 @@ const About = () => {
         </p>
         <motion.button
           variants={zoomInVariants}
-          className="bg-blue-500 hover:bg-white hover:text-blue-500 px-10 py-3 
+          className="bg-[#005AA7] hover:bg-[#FF4F5A] hover:text-white px-10 py-3 
                      rounded-lg font-bold text-white transition duration-300"
         >
           Read More
