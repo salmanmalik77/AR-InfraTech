@@ -10,96 +10,96 @@ import { MdOutlineDesignServices } from "react-icons/md";
 import { FaRegBuilding } from "react-icons/fa";
 import { FaSitemap } from "react-icons/fa";
 
-import client1 from "../src/assets/face1.avif";
-import client2 from "../src/assets/face1.avif";
-import client3 from "../src/assets/face1.avif";
+import client1 from "../src/assets/client1.png";
+import client2 from "../src/assets/client2.png";
+import client3 from "../src/assets/client3.png";
 
 export const allservices = [
   {
     icon: building,
-    title: "BUILDING RENOVATION",
+    title: "Building Renovation",
     about:
-      "Sample text. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "Transforming existing structures with modern upgrades, improving aesthetics, functionality, and safety while preserving the core design.",
   },
   {
     icon: construction,
-    title: "CONSTRUCTION SERVICES",
+    title: "Construction Services",
     about:
-      "Sample text. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "Comprehensive construction solutions, from residential projects to commercial developments, ensuring quality and timely delivery.",
   },
   {
     icon: design,
-    title: "DESIGN & PLANNING",
+    title: "Design & Planning",
     about:
-      "Sample text. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "Expert design and planning services that blend creativity and practicality, delivering tailored solutions for every project’s unique needs.",
   },
   {
     icon: document,
-    title: "DOCUMENTATION",
+    title: "Documentation",
     about:
-      "Sample text. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "Accurate and thorough project documentation, including permits, blueprints, and compliance reports, to streamline the construction process.",
   },
   {
     icon: paint,
-    title: "INTERIOR DESIGN",
+    title: "Interior Design",
     about:
-      "Sample text. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "Creating beautiful, functional interiors that reflect your style, combining aesthetics with ergonomics for comfortable and inspiring spaces.",
   },
   {
     icon: support,
-    title: "CUSTOMER SUPPORT",
+    title: "Customer Support",
     about:
-      "Sample text. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "Dedicated customer support, offering guidance and assistance throughout the project lifecycle to ensure client satisfaction and smooth execution.",
   },
 ];
 
 export const planning = [
   {
     icon: IoDocumentTextSharp,
-    title: "planning",
+    title: "Planning",
     about:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas gravida cursus",
+      "Detailed project planning that outlines every stage, setting clear timelines, goals, and resources to ensure seamless project execution.",
   },
   {
     icon: MdOutlineDesignServices,
-    title: "design",
+    title: "Design",
     about:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas gravida cursus",
+      "Creative and innovative design services that incorporate your vision, industry standards, and functionality for exceptional results.",
   },
   {
     icon: FaRegBuilding,
-    title: "building",
+    title: "Building",
     about:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas gravida cursus",
+      "Efficient and sustainable building practices, using quality materials and advanced techniques to bring your vision to life.",
   },
   {
     icon: FaSitemap,
-    title: "finish",
+    title: "Finishing",
     about:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas gravida cursus",
+      "High-quality finishing services that add the final touches, enhancing the appearance and durability of the completed structure.",
   },
 ];
 
 export const clients = [
   {
     image: client1,
-    name: "Name1",
+    name: "John Doe",
     about:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas gravida cursus",
+      "Working with this team was a fantastic experience. They understood our needs perfectly and delivered beyond our expectations. Highly recommend!",
     post: "Constructor",
   },
   {
     image: client2,
-    name: "Name2",
+    name: "Jack Smith",
     about:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas gravida cursus",
+      "As an architect, I value precision and creativity. This company brought my designs to life with great attention to detail and craftsmanship.",
     post: "Architect",
   },
   {
     image: client3,
-    name: "Name3",
+    name: "Michael Brown",
     about:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas gravida cursus",
+      "The project was completed on time and within budget. The quality of work and professionalism exceeded my expectations.",
     post: "Builder",
   },
 ];

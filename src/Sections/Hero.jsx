@@ -34,16 +34,14 @@ const Hero = () => {
           variants={slideUpVariants}
           className="text-[#1E293B] uppercase text-[40px] lg:text-[50px] font-bold leading-tight" // Dark gray main heading
         >
-          we will build your dreams
+          We Will Build Your Dreams
         </motion.h1>
-        <div className="w-[120px] h-[6px] bg-[#FF4F5A]"></div>{" "}
-        {/* Blue divider */}
-        <p className="text-[#1E293B] text-lg lg:text-[30px]">
-          {" "}
-          {/* Muted gray paragraph */}
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
-          gravida cursus
+        <div className="w-[120px] h-[6px] bg-[#FF4F5A]"></div>
+
+        <p className="text-[#E5E7EB] text-lg lg:text-[30px]">
+          At AR-InfraTech, we bring your vision to life with quality, innovation, and expertise—whether it’s residential, commercial, or industrial. Your dream, our commitment.
         </p>
+
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -74,7 +72,7 @@ const Hero = () => {
           whileInView="visible"
           variants={zoomInVariants}
           src={heroimg}
-          alt="hero image"
+          alt="Innovative Infrastructure Solutions"
           className="lg:h-[600px] h-[450px] object-contain lg:mb-[-100px]"
         />
       </div>

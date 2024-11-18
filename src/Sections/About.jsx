@@ -28,10 +28,7 @@ const About = () => {
         </h1>
         <div className="w-[120px] h-[6px] bg-[#005AA7]"></div>
         <p className="text-lg italic text-gray-700 mt-[50px]">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam
-          quos, rerum voluptatum consectetur dolor odit earum est. Enim,
-          explicabo? Tempore, reiciendis. Nobis voluptas magnam sit vel! Fugiat
-          officiis sunt ducimus?
+          AR-InfraTech is a forward-thinking company specializing in innovative infrastructure solutions. We leverage cutting-edge technology to deliver high-quality construction, project management, and sustainable building solutions for clients across various industries.
         </p>
       </motion.div>
 
@@ -43,18 +40,7 @@ const About = () => {
         className="lg:w-[40%] w-full flex flex-col justify-center items-start gap-6 px-4"
       >
         <p className="text-gray-700 text-lg text-justify">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus,
-          maiores. Pariatur nulla illum accusamus nemo maiores et aspernatur quo
-          sint cumque est voluptates incidunt omnis aliquam fuga amet dolorem
-          blanditiis dignissimos, eius itaque esse exercitationem minus non
-          reiciendis! Quisquam temporibus sequi a ipsum odio, corrupti eveniet?
-          Beatae ipsum rerum perspiciatis recusandae rem omnis atque dignissimos
-          quidem velit non. Voluptatem est deleniti, ea, provident modi quidem
-          doloribus illum aliquam dignissimos ipsa consectetur optio praesentium
-          magni laudantium quae eligendi quaerat repudiandae minus voluptate
-          reiciendis. Ex, saepe assumenda. Quas cupiditate veniam aut quaerat
-          obcaecati exercitationem vitae eaque, recusandae id dignissimos est
-          eligendi qui.
+          At AR-InfraTech, our mission is to shape the future of infrastructure by implementing sustainable, efficient, and reliable solutions. Our experienced team is dedicated to exceeding client expectations with innovative designs, precise engineering, and a focus on quality. Whether it’s urban development, commercial projects, or specialized infrastructure, we aim to deliver excellence every step of the way. Partner with us to build a future that stands the test of time.
         </p>
         <motion.button
           variants={zoomInVariants}
