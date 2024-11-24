@@ -1,8 +1,98 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { slideUpVariants, zoomInVariants } from "./animation";
+<<<<<<< Updated upstream
+=======
+import axios from "axios";
+>>>>>>> Stashed changes
 
 const Contact = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    mobile: "",
+    message: "",
+  });
+
+  const [notification, setNotification] = useState({
+    type: "",
+    message: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Basic email validation
+    return emailRegex.test(email);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // Validate the email first
+    if (!validateEmail(formData.email)) {
+      setNotification({
+        type: "error",
+        message: "Please enter a valid email address.",
+      });
+      return;
+    }
+
+    // Prepare the form data to send
+    const emailData = {
+      name: formData.name,
+      email: formData.email,
+      subject: "Contact Form Submission", // You can customize this
+      message: formData.message,
+    };
+
+    try {
+      const response = await axios.post(
+        "https://localhost:5001/api/Email/send",
+        emailData
+      );
+      // Display success notification
+      setNotification({
+        type: "success",
+        message: response.data.message,
+      });
+
+      // Clear the form after successful submission
+
+      setFormData({
+        name: "",
+        email: "",
+        mobile: "",
+        message: "",
+      });
+
+      // Remove the notification after 3 seconds
+      setTimeout(() => {
+        setNotification({ type: "", message: "" });
+      }, 3000); // 3 seconds delay before clearing the notification
+    } catch (error) {
+      // Display error notification
+
+      setNotification(
+        {
+          type: "error",
+          message: "Failed to send email. Please try again.",
+        },
+        3000
+      );
+
+      // Remove the error notification after 3 seconds
+      setTimeout(() => {
+        setNotification({ type: "", message: "" });
+      }, 3000);
+    }
+  };
   return (
     <div id="contact" className="bg-[#E5E5E5]">
       <div
@@ -52,32 +142,70 @@ const Contact = () => {
           >
             <input
               type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
               placeholder="Enter Full Name"
+<<<<<<< Updated upstream
               className="px-6 py-3 border-[2px] border-[#f8be5c] text-black rounded-lg w-full"
+=======
+              className="px-6 py-3 border-[2px] border-[#f8be5c] text-black rounded-lg w-full "
+>>>>>>> Stashed changes
             />
             <input
               type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
               placeholder="Enter Email"
+<<<<<<< Updated upstream
               className="px-6 py-3 border-[2px] border-[#f8be5c] text-black rounded-lg w-full"
+=======
+              className="px-6 py-3 border-[2px] border-[#f8be5c] text-black rounded-lg w-full "
+>>>>>>> Stashed changes
             />
             <input
               type="number"
+              name="mobile"
+              value={formData.mobile}
+              onChange={handleChange}
               placeholder="Enter Mobile Number"
+<<<<<<< Updated upstream
               className="px-6 py-3 border-[2px] border-[#f8be5c] text-black rounded-lg w-full"
             />
             <textarea
+=======
+              className="px-6 py-3 border-[2px] border-[#f8be5c] text-black rounded-lg w-full "
+            />
+            <textarea
+              name="message"
+              value={formData.message}
+              onChange={handleChange}
+>>>>>>> Stashed changes
               placeholder="Enter Your Message"
               rows="4"
               className="px-6 py-3 border-[2px] border-[#f8be5c] text-black rounded-lg w-full"
             />
             <motion.button
               variants={zoomInVariants}
+              onClick={handleSubmit}
               className="bg-blue-500 hover:bg-[#FF4F5A] hover:text-white px-10 py-4 
                        text-white font-bold rounded-lg w-full"
             >
               Submit
             </motion.button>
           </motion.div>
+
+          {/* Display Notification */}
+          {notification.message && (
+            <div
+              className={`mt-4 p-4 text-white rounded-lg ${
+                notification.type === "success" ? "bg-green-500" : "bg-red-500"
+              }`}
+            >
+              {notification.message}
+            </div>
+          )}
         </motion.div>
       </div>
     </div>
