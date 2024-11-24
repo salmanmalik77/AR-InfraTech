@@ -143,7 +143,7 @@ const Contact = () => {
               value={formData.name}
               onChange={handleChange}
               placeholder="Enter Full Name"
-              className="px-6 py-3 border-[2px] border-[#f8be5c] text-black rounded-lg w-full"
+              className="px-6 py-3 border-[2px] border-[#f8be5c] text-black rounded-lg w-full "
             />
             <input
               type="email"
@@ -151,7 +151,7 @@ const Contact = () => {
               value={formData.email}
               onChange={handleChange}
               placeholder="Enter Email"
-              className="px-6 py-3 border-[2px] border-[#f8be5c] text-black rounded-lg w-full"
+              className="px-6 py-3 border-[2px] border-[#f8be5c] text-black rounded-lg w-full "
             />
             <input
               type="number"
@@ -159,9 +159,12 @@ const Contact = () => {
               value={formData.mobile}
               onChange={handleChange}
               placeholder="Enter Mobile Number"
-              className="px-6 py-3 border-[2px] border-[#f8be5c] text-black rounded-lg w-full"
+              className="px-6 py-3 border-[2px] border-[#f8be5c] text-black rounded-lg w-full "
             />
             <textarea
+              name="message"
+              value={formData.message}
+              onChange={handleChange}
               placeholder="Enter Your Message"
               rows="4"
               className="px-6 py-3 border-[2px] border-[#f8be5c] text-black rounded-lg w-full"
