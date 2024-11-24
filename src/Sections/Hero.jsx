@@ -1,6 +1,6 @@
 import React from "react";
 import heroimg from "../assets/heroimg.png";
-import three from "../assets/three.jpeg";
+//import three from "../assets/three.jpeg";
 import five from "../assets/five.jpg";
 import { motion } from "framer-motion";
 import { slideUpVariants, zoomInVariants } from "./animation";
@@ -39,7 +39,9 @@ const Hero = () => {
         <div className="w-[120px] h-[6px] bg-[#FF4F5A]"></div>
 
         <p className="text-[#E5E7EB] text-lg lg:text-[30px]">
-          At AR-InfraTech, we bring your vision to life with quality, innovation, and expertise—whether it’s residential, commercial, or industrial. Your dream, our commitment.
+          At AR-InfraTech, we bring your vision to life with quality,
+          innovation, and expertise—whether it’s residential, commercial, or
+          industrial. Your dream, our commitment.
         </p>
 
         <motion.div

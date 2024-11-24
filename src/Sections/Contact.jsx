@@ -1,10 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { slideUpVariants, zoomInVariants } from "./animation";
-<<<<<<< Updated upstream
-=======
 import axios from "axios";
->>>>>>> Stashed changes
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -120,10 +117,10 @@ const Contact = () => {
           </motion.h1>
           <div className="w-[120px] h-[6px] bg-[#FF4F5A]"></div>
           <p className="text-3xl italic text-gray-700 mt-[40px]">
-            We are here to assist you with any inquiries or project-related questions. 
-            Whether you're looking for consultation, want to start a project, or need 
-            support, feel free to get in touch with us. Our team is ready to provide 
-            expert advice and personalized solutions.
+            We are here to assist you with any inquiries or project-related
+            questions. Whether you're looking for consultation, want to start a
+            project, or need support, feel free to get in touch with us. Our
+            team is ready to provide expert advice and personalized solutions.
           </p>
         </motion.div>
 
@@ -146,11 +143,7 @@ const Contact = () => {
               value={formData.name}
               onChange={handleChange}
               placeholder="Enter Full Name"
-<<<<<<< Updated upstream
               className="px-6 py-3 border-[2px] border-[#f8be5c] text-black rounded-lg w-full"
-=======
-              className="px-6 py-3 border-[2px] border-[#f8be5c] text-black rounded-lg w-full "
->>>>>>> Stashed changes
             />
             <input
               type="email"
@@ -158,11 +151,7 @@ const Contact = () => {
               value={formData.email}
               onChange={handleChange}
               placeholder="Enter Email"
-<<<<<<< Updated upstream
               className="px-6 py-3 border-[2px] border-[#f8be5c] text-black rounded-lg w-full"
-=======
-              className="px-6 py-3 border-[2px] border-[#f8be5c] text-black rounded-lg w-full "
->>>>>>> Stashed changes
             />
             <input
               type="number"
@@ -170,18 +159,9 @@ const Contact = () => {
               value={formData.mobile}
               onChange={handleChange}
               placeholder="Enter Mobile Number"
-<<<<<<< Updated upstream
               className="px-6 py-3 border-[2px] border-[#f8be5c] text-black rounded-lg w-full"
             />
             <textarea
-=======
-              className="px-6 py-3 border-[2px] border-[#f8be5c] text-black rounded-lg w-full "
-            />
-            <textarea
-              name="message"
-              value={formData.message}
-              onChange={handleChange}
->>>>>>> Stashed changes
               placeholder="Enter Your Message"
               rows="4"
               className="px-6 py-3 border-[2px] border-[#f8be5c] text-black rounded-lg w-full"
