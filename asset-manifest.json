@@ -1,0 +1,34 @@
+{
+  "files": {
+    "main.css": "/AR-InfraTech/static/css/main.6f34e3ea.css",
+    "main.js": "/AR-InfraTech/static/js/main.3466e9dc.js",
+    "static/js/453.3b584752.chunk.js": "/AR-InfraTech/static/js/453.3b584752.chunk.js",
+    "static/media/five.jpg": "/AR-InfraTech/static/media/five.ae194eff5fe33678331e.jpg",
+    "static/media/project8.jpg": "/AR-InfraTech/static/media/project8.6da91695c87c7c0f240e.jpg",
+    "static/media/project5.jpg": "/AR-InfraTech/static/media/project5.dc52d0e2319df0473141.jpg",
+    "static/media/project3.jpg": "/AR-InfraTech/static/media/project3.1a13dce14a2bc6e5bda2.jpg",
+    "static/media/heroimg.png": "/AR-InfraTech/static/media/heroimg.27ca9ea18d7365ae560a.png",
+    "static/media/project4.jpg": "/AR-InfraTech/static/media/project4.b9a010383aa9daa6c0a7.jpg",
+    "static/media/project1.jpg": "/AR-InfraTech/static/media/project1.085ccda8e6ea7ed7f313.jpg",
+    "static/media/project7.jpg": "/AR-InfraTech/static/media/project7.2a2027ede8bdd182c2c7.jpg",
+    "static/media/project2.jpg": "/AR-InfraTech/static/media/project2.5ed26c081f9e45bcee66.jpg",
+    "static/media/project6.jpg": "/AR-InfraTech/static/media/project6.7403f7ce46aab41a3f5d.jpg",
+    "static/media/client3.png": "/AR-InfraTech/static/media/client3.aaf07c096b1dd95a4952.png",
+    "static/media/client1.png": "/AR-InfraTech/static/media/client1.3ded7012bbf788e7c349.png",
+    "static/media/client2.png": "/AR-InfraTech/static/media/client2.d759d3e2ff2204ab4160.png",
+    "static/media/paint.svg": "/AR-InfraTech/static/media/paint.724ff1bee970c9ee659643675d67a0d1.svg",
+    "static/media/construction.svg": "/AR-InfraTech/static/media/construction.a7db6e4bcdc6c749c5e9ca79058acee7.svg",
+    "static/media/design.svg": "/AR-InfraTech/static/media/design.4964812946636c41dc1b0fbdcb242a64.svg",
+    "static/media/support.svg": "/AR-InfraTech/static/media/support.c227c9b05c39df5b387ca6c0676c052f.svg",
+    "static/media/document.svg": "/AR-InfraTech/static/media/document.6332890df6a2b6beeac74f2e3e163b87.svg",
+    "static/media/building.svg": "/AR-InfraTech/static/media/building.5b6b8e85eb8e7ab67144445ff4408c9e.svg",
+    "index.html": "/AR-InfraTech/index.html",
+    "main.6f34e3ea.css.map": "/AR-InfraTech/static/css/main.6f34e3ea.css.map",
+    "main.3466e9dc.js.map": "/AR-InfraTech/static/js/main.3466e9dc.js.map",
+    "453.3b584752.chunk.js.map": "/AR-InfraTech/static/js/453.3b584752.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.6f34e3ea.css",
+    "static/js/main.3466e9dc.js"
+  ]
+}
