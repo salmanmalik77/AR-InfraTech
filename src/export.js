@@ -19,7 +19,7 @@ export const allservices = [
     icon: building,
     title: "Building Renovation",
     about:
-      "Transforming existing structures with modern upgrades, improving aesthetics, functionality, and safety while preserving the core design.",
+      "Transforming existing structures with modern upgrades, improving aesthetics, functionality, and safety while preserving the core design.good team work",
   },
   {
     icon: construction,
@@ -99,7 +99,7 @@ export const clients = [
     image: client3,
     name: "Michael Brown",
     about:
-      "The project was completed on time and within budget. The quality of work and professionalism exceeded my expectations.",
+      "The project was completed on time and within budget. The quality of work and professionalism exceeded my expectations.looking for future projects also",
     post: "Builder",
   },
 ];

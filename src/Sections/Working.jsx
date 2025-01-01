@@ -52,7 +52,7 @@ const Working = () => {
               <h1 className="text-xl font-bold uppercase  text-white">
                 {item.title}
               </h1>
-              <p className="text-[18px] text-center text-white ">
+              <p className="text-[17px] text-center text-white ">
                 {item.about}
               </p>
             </div>
