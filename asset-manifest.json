@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/AR-InfraTech/static/css/main.6f34e3ea.css",
-    "main.js": "/AR-InfraTech/static/js/main.3466e9dc.js",
+    "main.css": "/AR-InfraTech/static/css/main.55faf14f.css",
+    "main.js": "/AR-InfraTech/static/js/main.7528edf3.js",
     "static/js/453.3b584752.chunk.js": "/AR-InfraTech/static/js/453.3b584752.chunk.js",
     "static/media/five.jpg": "/AR-InfraTech/static/media/five.ae194eff5fe33678331e.jpg",
     "static/media/project8.jpg": "/AR-InfraTech/static/media/project8.6da91695c87c7c0f240e.jpg",
@@ -23,12 +23,12 @@
     "static/media/document.svg": "/AR-InfraTech/static/media/document.6332890df6a2b6beeac74f2e3e163b87.svg",
     "static/media/building.svg": "/AR-InfraTech/static/media/building.5b6b8e85eb8e7ab67144445ff4408c9e.svg",
     "index.html": "/AR-InfraTech/index.html",
-    "main.6f34e3ea.css.map": "/AR-InfraTech/static/css/main.6f34e3ea.css.map",
-    "main.3466e9dc.js.map": "/AR-InfraTech/static/js/main.3466e9dc.js.map",
+    "main.55faf14f.css.map": "/AR-InfraTech/static/css/main.55faf14f.css.map",
+    "main.7528edf3.js.map": "/AR-InfraTech/static/js/main.7528edf3.js.map",
     "453.3b584752.chunk.js.map": "/AR-InfraTech/static/js/453.3b584752.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.6f34e3ea.css",
-    "static/js/main.3466e9dc.js"
+    "static/css/main.55faf14f.css",
+    "static/js/main.7528edf3.js"
   ]
 }
