@@ -9,6 +9,8 @@ import Working from "./Sections/Working";
 import Testimonials from "./Sections/Testimonials";
 import Contact from "./Sections/Contact";
 import "./App.css";
+
+import Agent from "./ai-agent/Agent";
 const App = () => {
   return (
     <>
@@ -21,6 +23,8 @@ const App = () => {
       <Testimonials />
       <Contact />
       <Footer />
+
+      <Agent />
     </>
   );
 };
