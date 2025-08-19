@@ -1,3 +1,6 @@
+// src/ai-agent/Agent.jsx
+import "./Agent.css";
+import { askUsersOperator } from "./usersOperator";
 import React, {
   useEffect,
   useMemo,
@@ -5,7 +8,12 @@ import React, {
   useState,
   useLayoutEffect,
 } from "react";
-import "./Agent.css";
+import { useNavigate } from "react-router-dom";
+
+/* ====== Config for basename (dev: "", prod: "/AR-InfraTech") ====== */
+const BASENAME = process.env.REACT_APP_BASENAME || "";
+const joinBase = (p) =>
+  (BASENAME + p).replace(/\/{2,}/g, "/").replace(/(?<!:)\/+$/, "") || "/";
 
 /* ====== Interpreter with safer matching (word boundaries) ====== */
 const SECTION_IDS = {
@@ -32,7 +40,7 @@ const KEYWORDS = {
     "services",
     "offerings",
     "सेवाएं",
-    "سروسز",
+    "सर्वीसज",
     "سہولیات",
     "సర్వీసులు",
   ],
@@ -74,7 +82,7 @@ const KEYWORDS = {
     "मदद",
     "रابطہ",
     "مدد",
-    "سپورٹ",
+    "सپورٹ",
     "సంప్రదించండి",
     "సహాయం",
   ],
@@ -108,43 +116,29 @@ const HELP_WORDS = [
 
 const HEADER_OFFSET = 100;
 
-// const escapeReg = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-// const hasWord = (text, w) =>
-//   new RegExp(`\\b${escapeReg(w)}\\b`, "i").test(text);
-// const anyWord = (text, arr) => arr.some((w) => hasWord(text, w));
-
 const escapeReg = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-
-// Unicode-aware “word boundary” using non-letter/number separators.
-// Works for English + Hindi + Urdu + Telugu, etc.
 function hasWord(text, w) {
   if (!w) return false;
   const re = new RegExp(
     `(?:^|[^\\p{L}\\p{N}])${escapeReg(w)}(?:[^\\p{L}\\p{N}]|$)`,
-    "iu" // i = case-insensitive, u = Unicode
+    "iu"
   );
   return re.test(text);
 }
-
 const anyWord = (text, arr) => arr.some((w) => hasWord(text, w));
-
 const norm = (s) => (s || "").normalize("NFC").toLowerCase().trim();
-// const norm = (s) => (s || "").toLowerCase().trim();
 
 function interpret(input) {
   const text = norm(input);
 
-  // special phrase
   if (/\breach\s*us\b/i.test(text))
     return { type: "SCROLL", targetId: SECTION_IDS.contact };
 
-  // section by keywords (word-boundary matching)
   for (const [name, keys] of Object.entries(KEYWORDS)) {
     if (anyWord(text, keys))
       return { type: "SCROLL", targetId: SECTION_IDS[name] };
   }
 
-  // explicit #id
   const idMatch = text.match(
     /(?:go to|open|navigate to|जाओ|खोलो|کھولو|వెళ్ళు)\s+#?([a-z0-9\-_]+)/i
   );
@@ -154,11 +148,10 @@ function interpret(input) {
       return { type: "SCROLL", targetId: id };
   }
 
-  // search
   if (anyWord(text, SEARCH_WORDS)) {
     const q = text
       .replace(
-        /search|find|look for|खोज|खोजें|तलाश|جستجو|تلاش|శోధించు|వెతుకు/gi,
+        /search|find|look for|खोज|खोजें|तलाश|جستجو|तलाश|శోధించు|వెతుకు/gi,
         ""
       )
       .trim();
@@ -180,7 +173,6 @@ function scrollToId(id) {
   window.scrollTo({ top: y, behavior: "smooth" });
   return true;
 }
-
 function executeIntent(intent) {
   switch (intent.type) {
     case "SCROLL":
@@ -206,9 +198,10 @@ function executeIntent(intent) {
 
 /* ====== UI ====== */
 const POS_KEY = "ai-fab-pos-v1";
-const DRAG_THRESHOLD = 6; // pixels
+const DRAG_THRESHOLD = 6; // px
 
 export default function Agent() {
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
   const [thinking, setThinking] = useState(false);
@@ -270,51 +263,40 @@ export default function Agent() {
     function placePanel() {
       if (!open || !fabPos || !panelRef.current) return;
 
-      const FAB_W = 56; // your fab size
-      const GAP = 12; // gap between fab and panel
-      const PAD = 8; // screen padding
+      const FAB_W = 56;
+      const GAP = 12;
+      const PAD = 8;
       const W = window.innerWidth;
       const H = window.innerHeight;
 
       const pw = panelRef.current.offsetWidth || 360;
       const ph = panelRef.current.offsetHeight || 260;
 
-      // Prefer LEFT of the FAB
       let x = fabPos.x - pw - GAP;
-      // If off-screen, put to RIGHT of the FAB
       if (x < PAD) x = fabPos.x + FAB_W + GAP;
-      // Clamp within viewport
       x = clamp(x, PAD, W - pw - PAD);
 
-      // Vertically center around the FAB
       let y = fabPos.y + FAB_W / 2 - ph / 2;
       y = clamp(y, PAD, H - ph - PAD);
 
       setPanelPos({ x, y });
     }
-
     placePanel();
-
-    function onResize() {
-      placePanel();
-    }
+    const onResize = () => placePanel();
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
   }, [open, fabPos]);
 
   useEffect(() => {
     if (!open) return;
-
     function onDown(e) {
       const panelEl = panelRef.current;
       const fabEl = fabRef.current;
       const t = e.target;
       const insidePanel = panelEl && panelEl.contains(t);
       const insideFab = fabEl && fabEl.contains(t);
-
       if (!insidePanel && !insideFab) setOpen(false);
     }
-
     document.addEventListener("mousedown", onDown);
     document.addEventListener("touchstart", onDown, { passive: true });
     return () => {
@@ -330,13 +312,10 @@ export default function Agent() {
     const cy = e.touches ? e.touches[0].clientY : e.clientY;
     startPt.current = { x: cx, y: cy };
     dragging.current = true;
-
     const rect = btn.getBoundingClientRect();
     offset.current = { dx: cx - rect.left, dy: cy - rect.top };
   }
-
   function maybeToggle(e) {
-    // Only toggle if we did NOT move beyond threshold (i.e., it was a click)
     const cx = e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
     const cy = e.changedTouches ? e.changedTouches[0].clientY : e.clientY;
     const dx = Math.abs(cx - startPt.current.x);
@@ -351,7 +330,6 @@ export default function Agent() {
   function addUser(text) {
     setMessages((m) => [...m, { role: "user", text }]);
   }
-
   function friendlyName(id) {
     const map = {
       [SECTION_IDS.home]: "Home",
@@ -365,6 +343,15 @@ export default function Agent() {
     return map[id] || id;
   }
 
+  const hardNavigate = (path) => {
+    const url = joinBase(path);
+    try {
+      navigate(url);
+    } catch {
+      window.location.href = url;
+    }
+  };
+
   async function onSubmit(e) {
     e.preventDefault();
     if (!input.trim()) return;
@@ -375,6 +362,42 @@ export default function Agent() {
     setThinking(true);
 
     try {
+      // 0) UI-first: make sure we always "change" URL so /users re-renders
+      const openUsersRe =
+        /\b(open|show|list|see|view)\b.*\busers?\b|\buser\s+list\b/i;
+      const createUserRe =
+        /\b(create|add|register)\b.*\buser\b|\bnew\s+user\b/i;
+
+      if (openUsersRe.test(q)) {
+        addAgent("Opening Users list…");
+        setOpen(false);
+        const ts = Date.now();
+        setTimeout(() => hardNavigate(`/users?show=1&ts=${ts}`), 0);
+        setThinking(false);
+        return;
+      }
+      if (createUserRe.test(q)) {
+        addAgent("Opening Create User form…");
+        setOpen(false);
+        const ts = Date.now();
+        setTimeout(() => hardNavigate(`/users?new=1&ts=${ts}`), 0);
+        // continue to operator for parsing (if key exists)
+      }
+
+      // 1) Token-using path only for user-related prompts
+      const userOpsPattern =
+        /\b(users?|user list|list users|create user|add user|register)\b/i;
+      if (userOpsPattern.test(q)) {
+        const operatorResponse = await askUsersOperator(q);
+        if (operatorResponse) {
+          addAgent(operatorResponse);
+          setThinking(false);
+          return;
+        }
+        // If null → fall back to regular site intents
+      }
+
+      // 2) Normal site intents
       const intent = interpret(q);
       if (intent.type === "UNKNOWN") {
         addAgent(
@@ -415,7 +438,6 @@ export default function Agent() {
       "Services",
       "Projects",
       "How we work",
-
       "Contact",
       "Reach us",
     ],
@@ -463,15 +485,6 @@ export default function Agent() {
             bottom: panelPos.y != null ? "auto" : undefined,
           }}
         >
-          {/* {open && (
-        <div
-          className="ai-panel"
-          role="dialog"
-          aria-modal="true"
-          aria-label="AI Assistant"
-          style={{ position: "fixed" }}
-        > */}
-          {/* round close button */}
           <button
             className="ai-close"
             onClick={() => setOpen(false)}
@@ -505,7 +518,7 @@ export default function Agent() {
               className="ai-input"
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="e.g., 'About', 'संपर्क', 'پراجیکٹس', 'సర్వీసులు', 'Reach us'"
+              placeholder="e.g., 'open users', 'create user', 'About', 'Reach us'"
               aria-label="Type a command"
             />
             <button type="submit" className="ai-go" disabled={thinking}>
@@ -529,7 +542,7 @@ export default function Agent() {
           </div>
 
           <div className="ai-hint">
-            Tip: Try “How we work”, “Reach us”, or “Search concrete mix design”.
+            Tip: Try “open users”, “create user”, or “How we work”.
           </div>
         </div>
       )}

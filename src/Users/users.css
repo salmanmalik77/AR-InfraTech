@@ -1,0 +1,292 @@
+.users-wrap {
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 0 16px;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+.users-title {
+  font-size: 28px;
+  font-weight: 800;
+  margin-bottom: 16px;
+  color: #0f172a;
+}
+.users-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+@media (max-width: 900px) {
+  .users-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.users-card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.06);
+  padding: 16px;
+}
+.users-card h2 {
+  margin: 4px 0 12px 0;
+  font-size: 18px;
+  color: #111827;
+}
+
+.users-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.users-form .field {
+  display: flex;
+  flex-direction: column;
+}
+.users-form label {
+  font-size: 12px;
+  color: #475569;
+  margin-bottom: 6px;
+}
+.users-form input {
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 10px 12px;
+  outline: none;
+}
+.users-form input:focus {
+  border-color: #94a3b8;
+}
+
+.users-form .error {
+  grid-column: 1/-1;
+  color: #b00020;
+  font-size: 12px;
+  margin-top: 2px;
+}
+.users-form .btn {
+  grid-column: 1/-1;
+  border: 0;
+  border-radius: 10px;
+  padding: 12px 14px;
+  background: #111;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
+.users-form .btn:hover {
+  background: #333;
+}
+
+.table-wrap {
+  overflow: auto;
+  max-height: 420px;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+}
+.users-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+.users-table th,
+.users-table td {
+  padding: 10px;
+  border-bottom: 1px solid #e5e7eb;
+  white-space: nowrap;
+}
+.users-table thead th {
+  position: sticky;
+  top: 0;
+  background: #f8fafc;
+  color: #0f172a;
+}
+/* Header bar with Create button */
+.users-headerbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1100px;
+  margin: 24px auto 10px auto;
+  padding: 0 16px;
+}
+.mb8 {
+  margin-bottom: 8px;
+}
+
+/* Buttons */
+.btn {
+  border: 0;
+  border-radius: 10px;
+  padding: 10px 14px;
+  background: #111;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
+.btn:hover {
+  background: #333;
+}
+.btn.primary {
+  background: #005aa7;
+}
+.btn.primary:hover {
+  background: #044b88;
+}
+
+/* Card container reused */
+.users-card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.06);
+  padding: 16px;
+  max-width: 1100px;
+  margin: 0 auto 24px auto;
+}
+.users-card h2 {
+  margin: 4px 0 12px 0;
+  font-size: 18px;
+  color: #111827;
+}
+
+/* Modal */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2147482000;
+}
+.modal-card {
+  position: relative;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+  width: min(640px, 92vw);
+  padding: 16px;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+.modal-card h2 {
+  margin: 0 0 10px 0;
+  font-size: 20px;
+  color: #0f172a;
+}
+
+.modal-close {
+  position: absolute;
+  top: -12px;
+  right: -12px;
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  border: 0;
+  background: #111;
+  color: #fff;
+  font-weight: 800;
+  line-height: 28px;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+}
+.modal-close:hover {
+  transform: translateY(-1px);
+}
+
+/* Form grid inside modal */
+.users-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+@media (max-width: 640px) {
+  .users-form {
+    grid-template-columns: 1fr;
+  }
+}
+
+.users-form .field {
+  display: flex;
+  flex-direction: column;
+}
+.users-form label {
+  font-size: 12px;
+  color: #475569;
+  margin-bottom: 6px;
+}
+.users-form input {
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 10px 12px;
+  outline: none;
+}
+.users-form input:focus {
+  border-color: #94a3b8;
+}
+
+.users-form .error {
+  grid-column: 1/-1;
+  color: #b00020;
+  font-size: 12px;
+  margin-top: 2px;
+}
+.form-actions {
+  grid-column: 1/-1;
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-top: 4px;
+}
+
+/* Table styling you already had */
+.table-wrap {
+  overflow: auto;
+  max-height: 420px;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+}
+.users-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+.users-table th,
+.users-table td {
+  padding: 10px;
+  border-bottom: 1px solid #e5e7eb;
+  white-space: nowrap;
+}
+.users-table thead th {
+  position: sticky;
+  top: 0;
+  background: #f8fafc;
+  color: #0f172a;
+}
+.users-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+/* small round X like your AI panel */
+.card-close {
+  position: relative;
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  border: 0;
+  background: #111;
+  color: #fff;
+  font-weight: 700;
+  line-height: 28px;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+.card-close:hover {
+  transform: translateY(-1px);
+}
