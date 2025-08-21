@@ -165,87 +165,76 @@ export default function UsersPage() {
 
       {/* Modal for Create New User */}
       {openForm && (
-        <div className="modal-backdrop" onClick={() => setOpenForm(false)}>
-          <div
-            className="modal-card"
-            onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
-          >
-            <button
-              className="modal-close"
-              aria-label="Close"
-              onClick={() => setOpenForm(false)}
-            >
+        <div className="users-fullpage">
+          <div className="users-card-head">
+            <h2>Create New User</h2>
+            <button className="card-close" onClick={() => setOpenForm(false)}>
               ×
             </button>
-            <h2>Create New User</h2>
-
-            <form onSubmit={onSubmit} className="users-form">
-              <div className="field">
-                <label>Name</label>
-                <input
-                  name="name"
-                  value={form.name}
-                  onChange={onChange}
-                  placeholder="John Doe"
-                />
-              </div>
-              <div className="field">
-                <label>Email</label>
-                <input
-                  name="email"
-                  value={form.email}
-                  onChange={onChange}
-                  placeholder="john@example.com"
-                />
-              </div>
-              <div className="field">
-                <label>Phone</label>
-                <input
-                  name="phone"
-                  value={form.phone}
-                  onChange={onChange}
-                  placeholder="+91-..."
-                />
-              </div>
-              <div className="field">
-                <label>Role</label>
-                <input
-                  name="role"
-                  value={form.role}
-                  onChange={onChange}
-                  placeholder="Engineer"
-                />
-              </div>
-              <div className="field">
-                <label>City</label>
-                <input
-                  name="city"
-                  value={form.city}
-                  onChange={onChange}
-                  placeholder="Hyderabad"
-                />
-              </div>
-
-              {err && <div className="error">{err}</div>}
-
-              <div className="form-actions">
-                <button
-                  type="button"
-                  className="btn"
-                  onClick={() => setOpenForm(false)}
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  className="btn primary"
-                  disabled={loading}
-                >
-                  {loading ? "Saving..." : "Save User"}
-                </button>
-              </div>
-            </form>
           </div>
+
+          <form onSubmit={onSubmit} className="users-form">
+            <div className="field">
+              <label>Name</label>
+              <input
+                name="name"
+                value={form.name}
+                onChange={onChange}
+                placeholder="John Doe"
+              />
+            </div>
+            <div className="field">
+              <label>Email</label>
+              <input
+                name="email"
+                value={form.email}
+                onChange={onChange}
+                placeholder="john@example.com"
+              />
+            </div>
+            <div className="field">
+              <label>Phone</label>
+              <input
+                name="phone"
+                value={form.phone}
+                onChange={onChange}
+                placeholder="+91-..."
+              />
+            </div>
+            <div className="field">
+              <label>Role</label>
+              <input
+                name="role"
+                value={form.role}
+                onChange={onChange}
+                placeholder="Engineer"
+              />
+            </div>
+            <div className="field">
+              <label>City</label>
+              <input
+                name="city"
+                value={form.city}
+                onChange={onChange}
+                placeholder="Hyderabad"
+              />
+            </div>
+
+            {err && <div className="error">{err}</div>}
+
+            <div className="form-actions">
+              <button
+                type="button"
+                className="btn"
+                onClick={() => setOpenForm(false)}
+              >
+                Cancel
+              </button>
+              <button type="submit" className="btn primary" disabled={loading}>
+                {loading ? "Saving..." : "Save User"}
+              </button>
+            </div>
+          </form>
         </div>
       )}
     </div>
