@@ -1,6 +1,7 @@
 // src/ai-agent/Agent.jsx
 import "./Agent.css";
 import { askUsersOperator } from "./usersOperator";
+import { askLLM, collectSiteContext } from "./llmClient";
 import React, {
   useEffect,
   useMemo,
@@ -10,12 +11,7 @@ import React, {
 } from "react";
 import { useNavigate } from "react-router-dom";
 
-/* ====== Config for basename (dev: "", prod: "/AR-InfraTech") ====== */
-const BASENAME = process.env.REACT_APP_BASENAME || "";
-const joinBase = (p) =>
-  (BASENAME + p).replace(/\/{2,}/g, "/").replace(/(?<!:)\/+$/, "") || "/";
-
-/* ====== Interpreter with safer matching (word boundaries) ====== */
+/* ====== Interpreter (site sections) ====== */
 const SECTION_IDS = {
   home: "home",
   about: "about",
@@ -40,7 +36,7 @@ const KEYWORDS = {
     "services",
     "offerings",
     "सेवाएं",
-    "सर्वीसज",
+    "سروسز",
     "سہولیات",
     "సర్వీసులు",
   ],
@@ -108,14 +104,13 @@ const HELP_WORDS = [
   "how",
   "कैसे",
   "मदद",
-  "مدद",
+  "مدد",
   "کیسے",
   "ఎలా",
   "సహాయం",
 ];
 
 const HEADER_OFFSET = 100;
-
 const escapeReg = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 function hasWord(text, w) {
   if (!w) return false;
@@ -130,15 +125,12 @@ const norm = (s) => (s || "").normalize("NFC").toLowerCase().trim();
 
 function interpret(input) {
   const text = norm(input);
-
   if (/\breach\s*us\b/i.test(text))
     return { type: "SCROLL", targetId: SECTION_IDS.contact };
-
   for (const [name, keys] of Object.entries(KEYWORDS)) {
     if (anyWord(text, keys))
       return { type: "SCROLL", targetId: SECTION_IDS[name] };
   }
-
   const idMatch = text.match(
     /(?:go to|open|navigate to|जाओ|खोलो|کھولو|వెళ్ళు)\s+#?([a-z0-9\-_]+)/i
   );
@@ -147,22 +139,19 @@ function interpret(input) {
     if (Object.values(SECTION_IDS).includes(id))
       return { type: "SCROLL", targetId: id };
   }
-
   if (anyWord(text, SEARCH_WORDS)) {
     const q = text
       .replace(
-        /search|find|look for|खोज|खोजें|तलाश|جستجو|तलाश|శోధించు|వెతుకు/gi,
+        /search|find|look for|खोज|खोजें|तलाश|جستجو|تلاش|శోధించు|వెతుకు/gi,
         ""
       )
       .trim();
     if (q) return { type: "SEARCH", query: q };
   }
-
   if (anyWord(text, HELP_WORDS)) return { type: "HELP" };
   if (anyWord(text, CALL_WORDS))
     return { type: "CALL", number: "<YOUR_PHONE_NUMBER>" };
   if (anyWord(text, WHATSAPP_WORDS)) return { type: "WHATSAPP", message: "" };
-
   return { type: "UNKNOWN", original: input };
 }
 
@@ -196,12 +185,13 @@ function executeIntent(intent) {
   }
 }
 
-/* ====== UI ====== */
+/* ====== UI & Agent ====== */
 const POS_KEY = "ai-fab-pos-v1";
-const DRAG_THRESHOLD = 6; // px
+const DRAG_THRESHOLD = 6;
 
 export default function Agent() {
   const navigate = useNavigate();
+
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
   const [thinking, setThinking] = useState(false);
@@ -214,16 +204,30 @@ export default function Agent() {
     },
   ]);
 
-  // panel positioning
+  // remember last operator command for manual confirm fallback
+  const lastOpTextRef = useRef(null);
+
+  // panel / drag
   const panelRef = useRef(null);
   const [panelPos, setPanelPos] = useState({ x: null, y: null });
   const clamp = (v, min, max) => Math.max(min, Math.min(max, v));
-
-  // drag state
   const fabRef = useRef(null);
   const dragging = useRef(false);
   const startPt = useRef({ x: 0, y: 0 });
   const offset = useRef({ dx: 0, dy: 0 });
+
+  // === helpers ===
+  const openUsersList = () => {
+    try {
+      navigate("/users?show=1");
+    } catch {
+      window.location.href = "/users?show=1";
+    }
+  };
+  const looksLikeCreated = (s) =>
+    /\buser\s+created\b|\bcreated\s*\(id:|\bcreatedId\b|✅\s*user\s*created/i.test(
+      s || ""
+    );
 
   useEffect(() => {
     try {
@@ -240,13 +244,9 @@ export default function Agent() {
       if (!dragging.current || !fabRef.current) return;
       const cx = e.touches ? e.touches[0].clientX : e.clientX;
       const cy = e.touches ? e.touches[0].clientY : e.clientY;
-      const nx = cx - offset.current.dx;
-      const ny = cy - offset.current.dy;
-      setFabPos({ x: nx, y: ny });
+      setFabPos({ x: cx - offset.current.dx, y: cy - offset.current.dy });
     }
-    const onUp = () => {
-      dragging.current = false;
-    };
+    const onUp = () => (dragging.current = false);
     window.addEventListener("mousemove", onMove);
     window.addEventListener("mouseup", onUp);
     window.addEventListener("touchmove", onMove, { passive: false });
@@ -262,23 +262,18 @@ export default function Agent() {
   useLayoutEffect(() => {
     function placePanel() {
       if (!open || !fabPos || !panelRef.current) return;
-
-      const FAB_W = 56;
-      const GAP = 12;
-      const PAD = 8;
-      const W = window.innerWidth;
-      const H = window.innerHeight;
-
+      const FAB_W = 56,
+        GAP = 12,
+        PAD = 8,
+        W = window.innerWidth,
+        H = window.innerHeight;
       const pw = panelRef.current.offsetWidth || 360;
       const ph = panelRef.current.offsetHeight || 260;
-
       let x = fabPos.x - pw - GAP;
       if (x < PAD) x = fabPos.x + FAB_W + GAP;
       x = clamp(x, PAD, W - pw - PAD);
-
       let y = fabPos.y + FAB_W / 2 - ph / 2;
       y = clamp(y, PAD, H - ph - PAD);
-
       setPanelPos({ x, y });
     }
     placePanel();
@@ -290,9 +285,9 @@ export default function Agent() {
   useEffect(() => {
     if (!open) return;
     function onDown(e) {
-      const panelEl = panelRef.current;
-      const fabEl = fabRef.current;
-      const t = e.target;
+      const panelEl = panelRef.current,
+        fabEl = fabRef.current,
+        t = e.target;
       const insidePanel = panelEl && panelEl.contains(t);
       const insideFab = fabEl && fabEl.contains(t);
       if (!insidePanel && !insideFab) setOpen(false);
@@ -318,9 +313,9 @@ export default function Agent() {
   function maybeToggle(e) {
     const cx = e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
     const cy = e.changedTouches ? e.changedTouches[0].clientY : e.clientY;
-    const dx = Math.abs(cx - startPt.current.x);
-    const dy = Math.abs(cy - startPt.current.y);
-    const moved = dx > DRAG_THRESHOLD || dy > DRAG_THRESHOLD;
+    const moved =
+      Math.abs(cx - startPt.current.x) > DRAG_THRESHOLD ||
+      Math.abs(cy - startPt.current.y) > DRAG_THRESHOLD;
     if (!moved) setOpen((v) => !v);
   }
 
@@ -343,14 +338,13 @@ export default function Agent() {
     return map[id] || id;
   }
 
-  const hardNavigate = (path) => {
-    const url = joinBase(path);
-    try {
-      navigate(url);
-    } catch {
-      window.location.href = url;
-    }
-  };
+  // crude signal the LLM asked for confirm
+  const containsConfirmRequest = (s) =>
+    /reply\s+['"]?confirm['"]?|confirm\s*=\s*true/i.test(s || "");
+
+  // decide if we can auto-confirm (user gave an email in the sentence)
+  const canAutoConfirm = (original) =>
+    /@/.test(original) || /\bemail\b/i.test(original);
 
   async function onSubmit(e) {
     e.preventDefault();
@@ -362,46 +356,83 @@ export default function Agent() {
     setThinking(true);
 
     try {
-      // 0) UI-first: make sure we always "change" URL so /users re-renders
-      const openUsersRe =
-        /\b(open|show|list|see|view)\b.*\busers?\b|\buser\s+list\b/i;
-      const createUserRe =
-        /\b(create|add|register)\b.*\buser\b|\bnew\s+user\b/i;
-
-      if (openUsersRe.test(q)) {
-        addAgent("Opening Users list…");
-        setOpen(false);
-        const ts = Date.now();
-        setTimeout(() => hardNavigate(`/users?show=1&ts=${ts}`), 0);
+      // Manual confirm path
+      if (/^confirm\b/i.test(q)) {
+        if (!lastOpTextRef.current) {
+          addAgent("Nothing to confirm. Ask me to create a user first.");
+        } else {
+          const res = await askUsersOperator(lastOpTextRef.current, true);
+          if (res) {
+            addAgent(res);
+            if (looksLikeCreated(res)) {
+              lastOpTextRef.current = null;
+              openUsersList();
+            }
+          }
+          lastOpTextRef.current = null; // avoid loops
+        }
         setThinking(false);
         return;
       }
-      if (createUserRe.test(q)) {
-        addAgent("Opening Create User form…");
+
+      // Users page navigation (UI) — open list view card
+      const openUsersRe =
+        /\b(open|show|list|see|view)\b.*\busers?\b|\buser\s+list\b/i;
+      if (openUsersRe.test(q)) {
+        addAgent("Opening Users list…");
         setOpen(false);
-        const ts = Date.now();
-        setTimeout(() => hardNavigate(`/users?new=1&ts=${ts}`), 0);
-        // continue to operator for parsing (if key exists)
+        openUsersList();
+        setThinking(false);
+        return;
       }
 
-      // 1) Token-using path only for user-related prompts
+      // Create/list via operator (LLM) — no UI form pop-up
       const userOpsPattern =
         /\b(users?|user list|list users|create user|add user|register)\b/i;
       if (userOpsPattern.test(q)) {
-        const operatorResponse = await askUsersOperator(q);
-        if (operatorResponse) {
-          addAgent(operatorResponse);
-          setThinking(false);
-          return;
+        lastOpTextRef.current = q;
+
+        // 1) first call (may ask to confirm or may answer directly e.g. list)
+        const res1 = await askUsersOperator(q, false);
+        if (res1) {
+          addAgent(res1);
+          if (looksLikeCreated(res1)) {
+            lastOpTextRef.current = null;
+            openUsersList();
+            setThinking(false);
+            return;
+          }
         }
-        // If null → fall back to regular site intents
+
+        // 2) auto-confirm once if it asked for confirmation and we have enough info (email present)
+        if (res1 && containsConfirmRequest(res1) && canAutoConfirm(q)) {
+          const res2 = await askUsersOperator(q, true);
+          if (res2) {
+            addAgent(res2);
+            if (looksLikeCreated(res2)) {
+              lastOpTextRef.current = null;
+              openUsersList();
+            }
+          }
+          lastOpTextRef.current = null; // clear after confirm attempt
+        }
+
+        setThinking(false);
+        return;
       }
 
-      // 2) Normal site intents
+      // default site actions OR general Q&A
       const intent = interpret(q);
       if (intent.type === "UNKNOWN") {
+        // Send to general chat endpoint so it can answer random questions
+        const siteContext = collectSiteContext();
+        const content = await askLLM({
+          messages: [{ role: "user", content: q }],
+          siteContext,
+          language: undefined,
+        });
         addAgent(
-          "I didn’t catch that. Try: About, Services, Projects, Contact — or say 'help'."
+          content || "Sorry, I couldn’t reach the AI service right now."
         );
       } else if (intent.type === "HELP") {
         addAgent(
@@ -434,12 +465,11 @@ export default function Agent() {
 
   const suggestions = useMemo(
     () => [
+      "open users",
+      "list users",
+      "create user john john@example.com",
+      "confirm",
       "About",
-      "Services",
-      "Projects",
-      "How we work",
-      "Contact",
-      "Reach us",
     ],
     []
   );
@@ -518,7 +548,7 @@ export default function Agent() {
               className="ai-input"
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="e.g., 'open users', 'create user', 'About', 'Reach us'"
+              placeholder="e.g., 'create user John john@example.com', 'list users', 'open users', 'confirm', 'Who is Salman Khan?'"
               aria-label="Type a command"
             />
             <button type="submit" className="ai-go" disabled={thinking}>
@@ -542,7 +572,8 @@ export default function Agent() {
           </div>
 
           <div className="ai-hint">
-            Tip: Try “open users”, “create user”, or “How we work”.
+            Tip: “create user alex alex@sample.com 98765 engineer Delhi” → I’ll
+            create it directly.
           </div>
         </div>
       )}
